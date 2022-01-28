@@ -1,12 +1,10 @@
 package com.devsuperior.dscatalog.entities;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
@@ -20,4 +18,21 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Getter
+    private Instant createdAt;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Getter
+    private Instant updatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = Instant.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        createdAt = Instant.now();
+    }
 }
