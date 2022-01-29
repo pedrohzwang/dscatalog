@@ -8,22 +8,24 @@ import java.time.Instant;
 
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
 
-    @Id
+    @Getter @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Getter @Setter
     private String name;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     @Getter
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     @Getter
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
 
     @PrePersist
